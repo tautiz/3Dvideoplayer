@@ -1,5 +1,5 @@
 {
-  "name": "project-udon",
+  "name": "3d-video-player",
   "private": true,
   "devDependencies": {
     "babel-plugin-add-module-exports": "^0.1.2",
@@ -40,5 +40,27 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
-  }
+  },
+  "description": "This repository mirrors the active [Virtual Art Sessions](http://g.co/VirtualArtSessions) site (code name Project Udon) and has been opened up with the Apache License 2.0 so that anyone interested can dig around and see how it works. This is meant to accompany the explanations in the [case study](https://developers.google.com/web/showcase/case-study/art-sessions).",
+  "version": "1.0.0",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tautiz/3Dvideoplayer.git"
+  },
+  "keywords": [
+    "3d",
+    "player",
+    "video"
+  ],
+  "author": "Tautvydas Dulskis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tautiz/3Dvideoplayer/issues"
+  },
+  "homepage": "https://github.com/tautiz/3Dvideoplayer#readme"
 }
