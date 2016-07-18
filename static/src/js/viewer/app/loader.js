@@ -254,7 +254,7 @@ function createPlayer({
 
             const dataPlayer = DataPlayer.create(0, 1000, offsets);
 //    dataPlayer.bindEvents( sketchBindings );
-            console.log(1000, offsets);
+//            console.log(1000, offsets);
 
             const { bindings : inputBindings, view: inputView, hmd, rhand, lhand, mirror } = InputView.create(inputState);
 //    dataPlayer.bindEvents( inputBindings );

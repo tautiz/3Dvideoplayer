@@ -37,6 +37,7 @@ const $viewerPlay = $('.viewer__play');
 const $replayButton = $('.session__replay');
 const $pauseButton = $('.session__pause');
 const $enterFullscreen = $('.session__fullscreen');
+const $ShowRawVideo = $('.rawvideo');
 const $exitFullscreen = $('.session__fullscreen-exit');
 const $speedButtons = $('.session__speed');
 
@@ -82,7 +83,7 @@ function init(options) {
         initSpeed_();
         setTimestamp_();
         bindPlayerCallbacks_();
-        //checkAutoplay_(sketch);
+        checkAutoplay_(sketch);
 
         // start autorotate
         sketchPlayer.startAutoRotate(-0.90);
@@ -158,6 +159,7 @@ function initEvents_() {
     $replayButton.on('click', handleReplayClick_);
     $pauseButton.on('click', handlePauseClick_);
     $enterFullscreen.on('click', handleFullscreenClick_);
+    $ShowRawVideo.on('click', handleShowRawVideoClick_);
     $exitFullscreen.on('click', handleFullscreenExitClick_);
     $speedButtons.find('button').on('click', handleSpeedClick_);
 }
@@ -250,7 +252,13 @@ function handleFullscreenClick_(e) {
     if (requestFullscreen) {
         requestFullscreen.call(document.documentElement);
     }
+}function handleShowRawVideoClick_(e) {
+    e.preventDefault();
+
+    $('#rawvideo').toggle();
 }
+
+
 
 /**
  * Close or exit full screen mode when close button is clicked.

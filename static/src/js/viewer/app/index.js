@@ -55,7 +55,7 @@ export function create({
         return new Promise(function (resolve, reject) {
             sketch = configuredLoader(events, options, resolve, reject);
 
-console.debug('sketchas', sketch);
+//console.debug('sketchas', sketch);
 
             view.add(sketch.view);
             //view.add(createLights());

@@ -127,6 +127,8 @@ function buildGeometry( {
   pixelsPerParticle
 } = {}) {
 
+  pixelsPerParticle = 1;
+
   var cols = Math.floor(sourceWidth / pixelsPerParticle);
   var rows = Math.floor(sourceHeight / pixelsPerParticle);
 

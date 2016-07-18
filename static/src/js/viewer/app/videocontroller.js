@@ -127,17 +127,22 @@ export function create(settings, frameLoop) {
     console.log("SETTINGS:", settings);
 
 
-    const $controllerGroup = $('<div>')
+    const $controllerGroup = $('<div id="controllerGroup">')
         .css({
             position: 'absolute',
-            top: '0px',
-            left: '0px',
-            zIndex: 1000
+            right: '22px',
+            bottom: '0px',
+            zIndex: 1000,
+            height: '345px',
+            width: '133px'
         })
         .appendTo($(document.body));
     //.hide();
 
-    const $video = $('<video>')
+    const $video = $('<video id="rawvideo" loop autoplay>')
+        .css({
+            width: '100%'
+        })
         .appendTo($controllerGroup)
         .before($('<p>RAW VIDEO</p>'));
 

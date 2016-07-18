@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8>
+    <title>My first Three.js app</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <style>
+        body {
+            background-color: #ffffff;
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas { width: 100%; height: 100% }
+
+    </style>
+</head>
+<body>
+
+<!--<video src="udon/templates/rgb.webm" autoplay controls></video>-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r78/three.min.js"></script>
+<script src="http://dulskis.eu/ThreeJs/TrackballControls.js"></script>
+<script src="http://dulskis.eu/ThreeJs/Detector.js"></script>
+
+<script>
+
+    if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+    // Darbines aplinkos sukurimas. Scena ir kamera
+    var scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
+
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+    var renderer = new THREE.WebGLRenderer( { antialias: false } );
+    renderer.setClearColor( scene.fog.color );
+    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
+
+
+    // Valdymo paruosimas
+    var controls = new THREE.TrackballControls( camera );
+    controls.rotateSpeed = 1.0;
+    controls.zoomSpeed = 1.2;
+    controls.panSpeed = 0.8;
+    controls.noZoom = false;
+    controls.noPan = false;
+    controls.staticMoving = true;
+    controls.dynamicDampingFactor = 0.3;
+    controls.keys = [ 65, 83, 68 ];
+    controls.addEventListener( 'change', renderink );
+
+    // Objektu pridejimas
+    var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+
+    var material = new THREE.MeshBasicMaterial(
+            {
+                color: 0x00ff00,
+                wireframe:false,
+                shading: THREE.FlatShading
+            }
+    );
+
+    var cube = new THREE.Mesh( geometry, material );
+    scene.add( cube );
+
+
+    var PlaynGeometry = new THREE.BoxGeometry( 10, 5, 10 );
+
+    var PlaynMaterial = new THREE.MeshBasicMaterial(
+            {
+                color: 0x000000,
+                wireframe:false,
+                shading: THREE.FlatShading
+            }
+    );
+    var playn = new THREE.Mesh( PlaynGeometry, PlaynMaterial );
+    scene.add( playn );
+
+    camera.position.z = 4;
+
+    // Pridedamas apsvietimas
+    light = new THREE.DirectionalLight( 0xffffff );
+    light.position.set( 1, 1, 1 );
+    scene.add( light );
+
+    light = new THREE.DirectionalLight( 0x002288 );
+    light.position.set( -1, -1, -1 );
+    scene.add( light );
+
+    light = new THREE.AmbientLight( 0x222222 );
+    scene.add( light );
+
+    // Renderinimas
+    function render( event ) {
+        requestAnimationFrame( render );
+
+        cube.rotation.x += 0.01;
+//        cube.rotation.y += 0.01;
+
+//        cube.position.x = Math.cos(cube.rotation.x) * 2;
+//        cube.position.y = Math.sin(cube.rotation.y) * 2;
+//        cube.position.z = Math.sin(cube.rotation.x) * 2;
+
+        renderer.render( scene, camera );
+    }
+    render();
+
+
+    function renderink() {
+        renderer.render( scene, camera );
+    }
+
+</script>
+</body>
+</html>
