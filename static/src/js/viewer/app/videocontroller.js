@@ -136,10 +136,10 @@ export function create(settings, frameLoop) {
             height: '345px',
             width: '133px'
         })
-        .appendTo($(document.body));
-    //.hide();
+        .appendTo($(document.body))
+    .hide();
 
-    const $video = $('<video id="rawvideo" loop autoplay>')
+    const $video = $('<video id="rawvideo" loop autoplay type="video/ogg; codecs="theora, vorbis">')
         .css({
             width: '100%'
         })

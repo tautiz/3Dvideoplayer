@@ -40,6 +40,8 @@ export function create( { video, artistSettings, cameraData, sourceCorners } = {
 
   console.log('initFromVideo', cameraData);
 
+    var testas = cameraData;
+
   const videoTexture = new THREE.Texture( video );
   videoTexture.minFilter = THREE.LinearFilter;
   videoTexture.magFilter = THREE.LinearFilter;

@@ -8,7 +8,7 @@
   },
   "artistSettings": {
     "blackCutOff": 0.0,
-    "pointSize": 4,
+    "pointSize": 1,
     "renderStyle": "points"
 	}
 }

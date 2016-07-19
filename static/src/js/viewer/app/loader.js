@@ -53,31 +53,31 @@ export var sketchLoader = R.curry(function ({ renderer, povCamera, frameLoop, co
     });
 
     //  Props can load separately..
-    //$.getJSON(path + 'props.json')
-    //    .then(function (props) {
-    //        if (props.pos && props.type === 'P') {
-    //            const position = Sketch.ThreeJSVec3FromTiltbrushData( props.pos );
-    //            const scale = Sketch.ThreeJSScaleFromTiltbrushData( props.scale );
-    //            position.y += scale.y * 0.5;
-    //
-    //            const geo = new THREE.BoxGeometry(1, 1, 1, 1, 1, 1);
-    //
-    //            const mat = new THREE.MeshPhongMaterial({color: 0xaaaaaa});
-    //            const mesh = new THREE.Mesh(geo, mat);
-    //            mesh.position.copy(position);
-    //            mesh.scale.copy(scale);
-    //            mesh.receiveShadow = true;
-    //            mesh.castShadow = false;
-    //
-    //            zUp.add(mesh);
-    //        }
-    //        else if (props.type === 'dress') {
-    //            zUp.add(VRMesh.getMannequin());
-    //        }
-    //    })
-    //    .fail(function () {
-    //        console.log('no props detected for this sketch');
-    //    });
+    $.getJSON(path + 'props.json')
+        .then(function (props) {
+            if (props.pos && props.type === 'P') {
+                const position = Sketch.ThreeJSVec3FromTiltbrushData( props.pos );
+                const scale = Sketch.ThreeJSScaleFromTiltbrushData( props.scale );
+                position.y += scale.y * 0.5;
+
+                const geo = new THREE.BoxGeometry(1, 1, 1, 1, 1, 1);
+
+                const mat = new THREE.MeshPhongMaterial({color: 0xaaaaaa});
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.copy(position);
+                mesh.scale.copy(scale);
+                mesh.receiveShadow = true;
+                mesh.castShadow = false;
+
+                zUp.add(mesh);
+            }
+            else if (props.type === 'dress') {
+                zUp.add(VRMesh.getMannequin());
+            }
+        })
+        .fail(function () {
+            console.log('no props detected for this sketch');
+        });
 
 
     function getAbsolutePath() {

@@ -253,9 +253,10 @@ function handleFullscreenClick_(e) {
         requestFullscreen.call(document.documentElement);
     }
 }function handleShowRawVideoClick_(e) {
-    e.preventDefault();
+    //e.preventDefault();
+    console.log('HIDE RAW');
 
-    $('#rawvideo').toggle();
+    $('#rawvideo').hide();
 }
 
 

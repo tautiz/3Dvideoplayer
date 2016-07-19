@@ -1,30 +1,30 @@
 {
   "positionA": {
-    "x": -15.31,
-    "y": 8.23,
-    "z": 30.2,
-    "pitch": 2.1,
-    "yaw": 3.86,
-    "roll": 0.97
+    "x": -80.0,
+    "y": 5.0,
+    "z": -165.0,
+    "pitch": -25.0,
+    "yaw": 0.0,
+    "roll": 0.0
   },
   "positionB": {
-    "x": -50,
-    "y": 13.97,
-    "z": 31.94,
-    "pitch": -1.4000000000000001,
-    "yaw": 3.18,
-    "roll": 1.96
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "pitch": 20.0,
+    "yaw": 0.0,
+    "roll": 0.0
   },
   "positionBoth": {
-    "x": -14.700000000000001,
-    "y": 95.97,
-    "z": -34.9,
-    "pitch": 2.13,
-    "yaw": -111.31,
-    "roll": 0.15
+    "x": 0.0,
+    "y": 250.0,
+    "z": 0.0,
+    "pitch": 0.0,
+    "yaw": 0.0,
+    "roll": 0.0
   },
-  "cameraTargetHeight": 70,
-  "positionGround": -5,
-  "playhead": 0.13579762542171117,
-  "time": -0.2059281872333107
+  "cameraTargetHeight": 130,
+  "positionGround": 0,
+  "playhead": 0.0,
+  "time": -0.0
 }
