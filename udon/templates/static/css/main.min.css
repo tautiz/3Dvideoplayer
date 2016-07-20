@@ -1373,7 +1373,7 @@ a:hover {
   padding: 40px;
   padding: 2.5rem;
   background: #181818;
-  border: solid #363636;
+  /*border: solid #363636;*/
   border-width: 1px 0;
   text-align: center;
 }

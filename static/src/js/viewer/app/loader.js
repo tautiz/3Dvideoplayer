@@ -572,6 +572,8 @@ function createGround() {
     const ground = new THREE.Mesh(new THREE.CylinderGeometry(200, 200, 20, 80),
         new THREE.MeshPhongMaterial({
             color: "#000000"
+            , specular: "#ffffff"
+            , shininess: 2
         })
     );
     ground.position.y = 0;
