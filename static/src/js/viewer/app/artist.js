@@ -223,11 +223,11 @@ function buildMaterial( {
     },
     vertexShader: vertexShader,
     fragmentShader: fragmentShader,
-    depthTest: true,
-    depthWrite: true,
-    transparent: false,
-  //  shading: THREE.FlatShading,
-  //  wireframe:true
+    depthTest: false,
+    depthWrite: false,
+    transparent: false
+    //shading: THREE.FlatShading,
+    //wireframe:true
   } );
 
 

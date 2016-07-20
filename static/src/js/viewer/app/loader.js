@@ -571,9 +571,7 @@ function createPlayer({
 function createGround() {
     const ground = new THREE.Mesh(new THREE.CylinderGeometry(200, 200, 20, 80),
         new THREE.MeshPhongMaterial({
-            color: "#202020"
-            , specular: "#593030"
-            , shininess: 20
+            color: "#000000"
         })
     );
     ground.position.y = 0;
