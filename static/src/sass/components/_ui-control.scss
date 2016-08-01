@@ -3,3 +3,7 @@
   @include rem(min-width, 32px);
   user-select: none;
 }
+
+.dg select {
+  color: black;
+}
