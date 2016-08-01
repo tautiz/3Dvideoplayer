@@ -123,9 +123,9 @@ function initPrompt_() {
 
     $('.viewer__prompt').addClass('is-visible');
     $('.viewer').on('mousedown touchstart', handleViewerClick_);
-    setTimeout(function () {
-        $('.viewer__prompt').removeClass('is-visible');
-    }, 5000);
+    //setTimeout(function () {
+    //    $('.viewer__prompt').removeClass('is-visible');
+    //}, 5000);
 }
 
 /**

@@ -9,6 +9,6 @@
   "artistSettings": {
     "blackCutOff": 0.0,
     "pointSize": 1,
-    "renderStyle": "points"
+    "renderStyle": "mesh"
 	}
 }
