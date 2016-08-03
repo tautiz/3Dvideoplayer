@@ -54,6 +54,44 @@ vec3 rgb_to_hsv(vec3 rgb) {
   return hsv;
 }
 
+vec3 rgb2hsl( vec3 color ) {
+    float h = 0.0;
+    float s = 0.0;
+    float l = 0.0;
+    float r = color.r;
+    float g = color.g;
+    float b = color.b;
+    float cMin = min( r, min( g, b ) );
+    float cMax = max( r, max( g, b ) );
+    l =  ( cMax + cMin ) / 2.0;
+
+    if ( cMax > cMin ) {
+        float cDelta = cMax - cMin;
+        // saturation
+        if ( l < 0.5 ) {
+            s = cDelta / ( cMax + cMin );
+        } else {
+            s = cDelta / ( 2.0 - ( cMax + cMin ) );
+        }
+
+        // hue
+        if ( r == cMax ) {
+            h = ( g - b ) / cDelta;
+        } else if ( g == cMax ) {
+            h = 2.0 + ( b - r ) / cDelta;
+        } else {
+            h = 4.0 + ( r - g ) / cDelta;
+        }
+
+        if ( h < 0.0) {
+            h += 6.0;
+        }
+        h = h / 6.0;
+
+    }
+    return vec3( h, s, l );
+}
+
 uniform float cam_fovx;
 uniform float cam_fovy;
 uniform float cam_ppx;
@@ -61,12 +99,16 @@ uniform float cam_ppy;
 uniform float cam_minDepth ;
 uniform float cam_maxDepth ;
 
+vec3 xyz( float x, float y, float depth ) {
+    float z = depth;
+    return vec3( ( x / 640.0 ) * depth * 1.11087, ( y / 480.0 ) * z * 0.832305, - depth );
+}
+
 vec3 pixelToWorld(float x, float y, float depth) {
   vec3 pos = vec3((x - cam_ppx) * depth / cam_fovx,
                     (y - cam_ppy) * depth / cam_fovy, depth);
   return pos;
 }
-
 
 const float hue_start = 0.0 / 360.0;
 const float hue_end = 360.0 / 360.0;
@@ -95,7 +137,7 @@ const float PI = 3.14159265358979323846264;
 void main() {
 
 
-  colorUV = vec2( (position.x + sampleLeft ) / ( width * 2.0 ), (position.y + sampleTop) / ( height * 2.0 ) + 0.5  );  
+  colorUV = vec2( (position.x + sampleLeft ) / ( width * 2.0 ), (position.y + sampleTop) / ( height * 2.0 ) + 0.5  );
   depthUV = vec2( colorUV.x, colorUV.y - 0.5 );
 
   vec4 depthPixel = texture2D( map, depthUV );
@@ -106,16 +148,7 @@ void main() {
   float hueRatio = 0.0;
   isHidden = 0.0;
 
-  if (depthHSV.z > 0.92) {
-    /*
-    // if the color is too black, discard (probably background/edge) 
-    if (length(colorPixel) < (1.0 + blackCutOff) ) {
-      isHidden = 1.0;
-    } else {
-      hueRatio = depthHSV.x;
-      dist = mix(cam_minDepth, cam_maxDepth, hueRatio);
-    }
-    */
+  if (depthHSV.z > 0.73) {
     hueRatio = depthHSV.x;
     dist = mix(cam_minDepth, cam_maxDepth, hueRatio);
   } 
@@ -128,7 +161,7 @@ void main() {
   if (isHidden != 1.0) {
     vec3 pos = pixelToWorld(position.x, position.y, dist);
 
-    float scaleFactor = 0.10; // Kinect to TB
+    float scaleFactor = 0.2; // Kinect to TB
     vec3 scaledPos = pos.xyz * vec3(scaleFactor, scaleFactor, -scaleFactor);
 
     vec4 mvPosition = modelViewMatrix * vec4( scaledPos, 1.0 );

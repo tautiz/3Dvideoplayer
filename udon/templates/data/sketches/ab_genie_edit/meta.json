@@ -7,8 +7,8 @@
     "source": "videos/ab_genie/edit_v1b"
   },
   "artistSettings": {
-    "blackCutOff": 0.002,
-    "pointSize": 2,
-    "renderStyle": "point"
+    "blackCutOff": 1,
+    "pointSize": 1,
+    "renderStyle": "points"
 	}
 }

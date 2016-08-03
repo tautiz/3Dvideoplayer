@@ -62,6 +62,6 @@ module.exports = function() {
       gutil.log('Rebundle...');
     });
 
-    return rebundle();
+    return rebundle().on('error', gutil.log);
   };
 };

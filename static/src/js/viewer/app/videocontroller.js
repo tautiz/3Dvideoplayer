@@ -124,7 +124,7 @@ export function create(settings, frameLoop) {
     if (forcePath == 'local') settings.source = VideoSource.LOCAL;
     if (forcePath == 'remote') settings.source = VideoSource.REMOTE;
 
-    console.log("SETTINGS:", settings);
+    //console.log("SETTINGS:", settings);
 
 
     const $controllerGroup = $('<div id="controllerGroup">')

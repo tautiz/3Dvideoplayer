@@ -53,31 +53,31 @@ export var sketchLoader = R.curry(function ({ renderer, povCamera, frameLoop, co
     });
 
     //  Props can load separately..
-    $.getJSON(path + 'props.json')
-        .then(function (props) {
-            if (props.pos && props.type === 'P') {
-                const position = Sketch.ThreeJSVec3FromTiltbrushData( props.pos );
-                const scale = Sketch.ThreeJSScaleFromTiltbrushData( props.scale );
-                position.y += scale.y * 0.5;
-
-                const geo = new THREE.BoxGeometry(1, 1, 1, 1, 1, 1);
-
-                const mat = new THREE.MeshPhongMaterial({color: 0xaaaaaa});
-                const mesh = new THREE.Mesh(geo, mat);
-                mesh.position.copy(position);
-                mesh.scale.copy(scale);
-                mesh.receiveShadow = true;
-                mesh.castShadow = false;
-
-                zUp.add(mesh);
-            }
-            else if (props.type === 'dress') {
-                zUp.add(VRMesh.getMannequin());
-            }
-        })
-        .fail(function () {
-            console.log('no props detected for this sketch');
-        });
+    //$.getJSON(path + 'props.json')
+    //    .then(function (props) {
+    //        if (props.pos && props.type === 'P') {
+    //            const position = Sketch.ThreeJSVec3FromTiltbrushData( props.pos );
+    //            const scale = Sketch.ThreeJSScaleFromTiltbrushData( props.scale );
+    //            position.y += scale.y * 0.5;
+    //
+    //            const geo = new THREE.BoxGeometry(1, 1, 1, 1, 1, 1);
+    //
+    //            const mat = new THREE.MeshPhongMaterial({color: 0xaaaaaa});
+    //            const mesh = new THREE.Mesh(geo, mat);
+    //            mesh.position.copy(position);
+    //            mesh.scale.copy(scale);
+    //            mesh.receiveShadow = true;
+    //            mesh.castShadow = false;
+    //
+    //            zUp.add(mesh);
+    //        }
+    //        else if (props.type === 'dress') {
+    //            zUp.add(VRMesh.getMannequin());
+    //        }
+    //    })
+    //    .fail(function () {
+    //        console.log('no props detected for this sketch');
+    //    });
 
 
     function getAbsolutePath() {
@@ -131,8 +131,7 @@ function createPlayer({
         $.getJSON(path + 'input.json')
     ];
 
-    const vc = VideoController
-        .create(VideoController.defaultVideoSettings(), frameLoop);
+    const vc = VideoController.create(VideoController.defaultVideoSettings(), frameLoop);
 
     if (hasVideo) {
         loadList.push($.getJSON(path + 'playback.json'));
@@ -146,9 +145,40 @@ function createPlayer({
     Promise.all(loadList)
         .then(function ([ sketchData, inputState, playbackMeta, offsets, editing, videoController ] = []) {
             console.timeEnd('load json');
+/*
+            var artistViewGui = new dat.GUI();
+            artistViewGui.remember(offsets.positionA);
 
-            const ground = createGround();
-            mainGroup.add(ground);
+            var afvg = artistViewGui.addFolder('Position A');
+            afvg.add(offsets.positionA, 'x', -500, 500);
+            afvg.add(offsets.positionA, 'y', -500, 500);
+            afvg.add(offsets.positionA, 'z', -500, 500);
+
+            afvg.add(offsets.positionA, 'pitch', -0, 360).step(0.1);
+            afvg.add(offsets.positionA, 'yaw', -0, 360).step(0.1);
+            afvg.add(offsets.positionA, 'roll', -0, 360).step(0.1);
+
+            var abvg = artistViewGui.addFolder('Position B');
+            abvg.add(offsets.positionB, 'x', -500, 500);
+            abvg.add(offsets.positionB, 'y', -500, 500);
+            abvg.add(offsets.positionB, 'z', -500, 500);
+
+            abvg.add(offsets.positionB, 'pitch', -0, 360).step(0.1);
+            abvg.add(offsets.positionB, 'yaw', -0, 360).step(0.1);
+            abvg.add(offsets.positionB, 'roll', -0, 360).step(0.1);
+
+            var abtvg = artistViewGui.addFolder('Position both');
+            abtvg.add(offsets.positionBoth, 'x', -300, 300);
+            abtvg.add(offsets.positionBoth, 'y', -300, 300);
+            abtvg.add(offsets.positionBoth, 'z', -300, 300);
+
+            abtvg.add(offsets.positionBoth, 'pitch', -0, 360);
+            abtvg.add(offsets.positionBoth, 'yaw', -0, 360);
+            abtvg.add(offsets.positionBoth, 'roll', -0, 360);
+*/
+
+            //const ground = createGround();
+            //mainGroup.add(ground);
 
             frameLoop.add(function () {
                 if (offsets.cameraTargetHeight !== undefined) {
@@ -243,7 +273,7 @@ function createPlayer({
                     artistBackView.rotation.z = offsets.positionB.roll * Math.PI / 180;
                     artistGroup.rotation.z = offsets.positionBoth.roll * Math.PI / 180;
 
-                    ground.position.y = offsets.positionGround;
+                    //ground.position.y = offsets.positionGround;
                 });
             }
 
@@ -261,7 +291,7 @@ function createPlayer({
 //    zUp.add( inputView );
 
 
-            const mainCamera = renderer.getDefaultCamera();
+            //const mainCamera = renderer.getDefaultCamera();
 
 //    const straightEdgePlayer = StraightEdgeTool.createPlayer( sketchData, rhand );
 //    dataPlayer.bindEvents( straightEdgePlayer.bindings );
@@ -291,7 +321,7 @@ function createPlayer({
                 setPOV(appState.pov);
             }
 
-            $(renderer.getThumbnailElement()).click(togglePOV);
+            //$(renderer.getThumbnailElement()).click(togglePOV);
 
             let endCalled = false;
             if (videoController) {
@@ -573,10 +603,18 @@ function createGround() {
         new THREE.MeshPhongMaterial({
             color: "#000000"
             , specular: "#ffffff"
-            , shininess: 2
+            , shininess: 1
         })
     );
-    ground.position.y = 0;
-    ground.receiveShadow = true;
+
+    //
+    //var guiGround = new dat.GUI();
+    //var ggp = guiGround.addFolder('Ground Position');
+    //ggp.add(ground.position, 'x', -500, 500);
+    //ggp.add(ground.position, 'y', -500, 500);
+    //ggp.add(ground.position, 'z', -500, 500);
+
+    //ground.position.y = 0;
+    ground.receiveShadow = false;
     return ground;
 }

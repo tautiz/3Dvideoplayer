@@ -9,7 +9,7 @@
 
       "width": 512.0,
       "height": 424.0,
-      "minDepth": 0.0,
+      "minDepth": 600.0,
       "maxDepth": 4500.0
     },
     {
@@ -21,7 +21,7 @@
 
       "width": 512.0,
       "height": 424.0,
-      "minDepth": 0.0,
+      "minDepth": 860.0,
       "maxDepth": 4450.0
     }
   ]
