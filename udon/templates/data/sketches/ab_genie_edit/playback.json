@@ -1,24 +1,28 @@
 {
   "cameras": [
     {
-      "fovx": 512.0,
-      "fovy": 424.0,
-      "ppx": 150.0,
-      "ppy": 212.0,
-      "width": 1024.0,
-      "height": 848.0,
-      "minDepth": 1700.0,
+      "fovx": 365.913,
+      "fovy": 365.913,
+
+      "ppx": 256.0,
+      "ppy": 210.0,
+
+      "width": 512.0,
+      "height": 424.0,
+      "minDepth": 0.0,
       "maxDepth": 4500.0
     },
     {
-      "fovx": 512.0,
-      "fovy": 424.0,
-      "ppx": 259.0,
-      "ppy": 205.0,
-      "width": 1024.0,
-      "height": 848.0,
-      "minDepth": 1700.0,
-      "maxDepth": 4500.0
+      "fovx": 366.627,
+      "fovy": 366.627,
+
+      "ppx": 261.995,
+      "ppy": 211,
+
+      "width": 512.0,
+      "height": 424.0,
+      "minDepth": 0.0,
+      "maxDepth": 4450.0
     }
   ]
 }
