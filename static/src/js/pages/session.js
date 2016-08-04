@@ -83,10 +83,13 @@ function init(options) {
         initSpeed_();
         setTimestamp_();
         bindPlayerCallbacks_();
-        checkAutoplay_(sketch);
 
         // start autorotate
         sketchPlayer.startAutoRotate(-0.90);
+
+        // Engaged autoplay
+        sketchPlayer.play();
+        checkAutoplay_(sketch);
 
         if (Modernizr.performance) {
             timeToScreen = now - window.performance.timing.navigationStart;
@@ -217,12 +220,12 @@ function handlePlayClick_(e) {
  */
 function handleReplayClick_(e) {
     e.preventDefault();
-    sketchPlayer.seek(0);
+    sketchPlayer.seek(1);
     sketchPlayer.play();
 
     // Update timestamp and progress bar immediately.
     setTimestamp_();
-    progressBar.$el.slider('value', 0);
+    progressBar.$el.slider('value', 1);
 }
 
 /**
