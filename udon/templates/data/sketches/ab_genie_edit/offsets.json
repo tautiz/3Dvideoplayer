@@ -23,7 +23,7 @@
     "yaw": 0.0,
     "roll": 0.0
   },
-  "cameraTargetHeight": 150,
+  "cameraTargetHeight": 65,
   "positionGround": 0,
   "playhead": 0.0,
   "time": 0
