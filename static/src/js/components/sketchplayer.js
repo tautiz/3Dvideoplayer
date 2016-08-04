@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 import * as Signal from '../viewer/app/signal';
-//import * as SketchAnalytics from './sketchanalytics';
+import * as SketchAnalytics from './sketchanalytics';
 
 class SketchPlayer {
   constructor(viewer, sketch) {
-    //this.analytics = new SketchAnalytics.default(viewer, sketch);
+    this.analytics = new SketchAnalytics.default(viewer, sketch);
     this.sketch = sketch;
 
     this.viewer = viewer;

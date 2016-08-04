@@ -8,7 +8,8 @@
   },
   "artistSettings": {
     "blackCutOff": 1,
-    "pointSize": 1,
-    "renderStyle": "points"
+    "pointSize": 4,
+    "pixelsPerParticle":2,
+    "renderStyle": "point"
 	}
 }

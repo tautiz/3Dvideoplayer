@@ -8,7 +8,7 @@
       "ppy": 210.0,
 
       "width": 512.0,
-      "height": 424.0,
+      "height": 395.0,
       "minDepth": 600.0,
       "maxDepth": 4500.0
     },
@@ -20,7 +20,7 @@
       "ppy": 211,
 
       "width": 512.0,
-      "height": 424.0,
+      "height": 395.0,
       "minDepth": 860.0,
       "maxDepth": 4450.0
     }

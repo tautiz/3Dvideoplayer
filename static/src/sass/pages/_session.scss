@@ -86,7 +86,8 @@
 
 .session__timestamp {
   @include rem(margin-right, 20px);
-  @include rem(top, 3px);
+  //@include rem(top, 7px);
+  top: 7px !important;
   position: relative;
 }
 
