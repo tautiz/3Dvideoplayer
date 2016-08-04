@@ -27,7 +27,7 @@ $slider-handle-offset-v: floor($slider-size/2) * -1;
   .ui-slider-range {
     @include rem(height, 3px);
     @include rem(top, 10px);
-    background: $burning-orange;
+    background: $white;
   }
 
   .ui-slider-handle {
@@ -36,7 +36,7 @@ $slider-handle-offset-v: floor($slider-size/2) * -1;
     @include rem(margin-top, $slider-handle-offset-v);
     @include rem(padding, $slider-focus-outline-gap);
     @include rem(width, $slider-size + $slider-focus-outline-gap);
-    background: $burning-orange;
+    background: $white;
     background-clip: content-box;
     border-radius: 50%;
     border: none;
@@ -53,6 +53,6 @@ $slider-handle-offset-v: floor($slider-size/2) * -1;
   }
 
   .ui-state-active {
-    background-color: $burning-orange;
+    background-color: $gray;
   }
 }
