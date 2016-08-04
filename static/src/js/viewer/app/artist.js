@@ -31,27 +31,12 @@ export function create({ video, artistSettings, cameraData, sourceCorners } = {}
     const sampleTop = sourceCorners.top;
     const sampleLeft = sourceCorners.left;
 
-    let pixelsPerParticle = 2.0;
+    let pixelsPerParticle = artistSettings.pixelsPerParticle;
     if (DeviceCheck.isMobile()) {
         pixelsPerParticle = 3.0;
     }
 
     let kinectPitch = 0;
-
-    //console.debug('initFromVideo', cameraData);
-
-    //var cameraGUI = new dat.GUI();
-    //cameraGUI.add(cameraData, 'fovx', -0, 1000);
-    //cameraGUI.add(cameraData, 'fovy', -0, 1000);
-    //cameraGUI.add(cameraData, 'ppx', -0, 1000);
-    //cameraGUI.add(cameraData, 'width', -0, 1000);
-    //var cameraGUIcontroller = cameraGUI.add(artistSettings, 'renderStyle', ["points", "mesh", "wireframe", "lines", "lineSegments"]);
-    //
-    //cameraGUIcontroller.onChange(function(value) {
-    //
-    //    alert("The new value is " + value);
-    //});
-
 
     const videoTexture = new THREE.Texture(video);
     videoTexture.minFilter = THREE.LinearFilter;
@@ -141,8 +126,6 @@ function buildGeometry({
     pixelsPerParticle
     } = {}) {
 
-    pixelsPerParticle = 1;
-
     var cols = Math.floor(sourceWidth / pixelsPerParticle);
     var rows = Math.floor(sourceHeight / pixelsPerParticle);
 
@@ -180,7 +163,6 @@ function buildGeometry({
         for (let y = 0; y < cols; y++) {
             for (let x = 0; x < rows; x++) {
                 geometry.vertices.push(new THREE.Vector3(x * pixelsPerParticle, y * pixelsPerParticle, 0));
-                // geometry.vertices.push( new THREE.Vector3( (x+1) * pixelsPerParticle, y * pixelsPerParticle, 0 ) );
                 geometry.vertices.push(new THREE.Vector3((x + 1) * pixelsPerParticle, y * pixelsPerParticle, 0));
                 geometry.vertices.push(new THREE.Vector3(x * pixelsPerParticle, y * pixelsPerParticle, 0));
                 geometry.vertices.push(new THREE.Vector3(x * pixelsPerParticle, (y + 1) * pixelsPerParticle, 0));
@@ -233,12 +215,11 @@ function buildMaterial({
         },
         vertexShader: vertexShader,
         fragmentShader: fragmentShader,
-        depthTest: false,
-        depthWrite: false,
-        transparent: false,
+        depthTest: true,
+        depthWrite: true,
+        transparent: true
         //shading: THREE.FlatShading,
         //wireframe:false
-        clipping:false
     });
 /*
     var artistViewGui = new dat.GUI();
@@ -288,11 +269,11 @@ function buildMaterial({
     return material;
 
 }
-
-function MMtoRawIndex(depthMM) {
-    var indexFloat = ((1000.0 / depthMM) - 3.3309495161) / -0.0030711016;
-    return Math.floor(indexFloat);
-}
+//
+//function MMtoRawIndex(depthMM) {
+//    var indexFloat = ((1000.0 / depthMM) - 3.3309495161) / -0.0030711016;
+//    return Math.floor(indexFloat);
+//}
 
 
 // const frustrum = null;
