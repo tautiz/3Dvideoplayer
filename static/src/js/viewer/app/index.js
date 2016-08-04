@@ -20,7 +20,7 @@ import R from 'ramda';
 import * as Loader from './loader';
 import * as Signal from './signal';
 
-const BG_COLOR = 0xffffff;
+const BG_COLOR = 0x5e5e5e;
 
 export function create({
     frameLoop,
