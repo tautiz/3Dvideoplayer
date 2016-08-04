@@ -14,10 +14,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
     <link rel="stylesheet" href="static/css/main.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link href="static/img/favicon.ico" rel="shortcut icon">
     <script src="static/js/third_party/modernizr-custom.js"></script>
-    <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
-
+    <!--<script src="http://threejs.org/examples/js/libs/stats.min.js"></script>-->
     <script src="http://threejs.org/examples/js/libs/dat.gui.min.js"></script>
 
 </head>
@@ -40,13 +40,13 @@
         <div class="session__controls">
             <div class="icon-button session__buttons">
                 <button class="session__play">
-                    Play
+                    <i class="fa fa-play-circle fa-2x" aria-hidden="true" style="color:white"></i>
                 </button>
                 <button class="icon-button session__pause">
-                    Pause
+                    <i class="fa fa-pause-circle fa-2x" aria-hidden="true" style="color:white"></i>
                 </button>
                 <button class="icon-button session__replay">
-                    Replay
+                    <i class="fa fa-reply-all fa-2x" aria-hidden="true" style="color:white"></i>
                 </button>
             </div>
 
@@ -58,14 +58,11 @@
             </div>
 
             <div class="session__buttons-right">
-                <!--<button class="icon-button rawvideo">-->
-                <!--RAW-->
-                <!--</button>-->
                 <button class="icon-button session__fullscreen">
-                    FullScreen
+                    <i class="fa fa-arrows-alt fa-2x" aria-hidden="true"style="color:white"></i>
                 </button>
                 <button class="icon-button session__fullscreen-exit">
-                    Exit
+                    <i class="fa fa-compress fa-2x" aria-hidden="true"style="color:white"></i>
                 </button>
             </div>
 
@@ -73,15 +70,14 @@
 
     </div>
     <div class="viewer__play">
-        <img src="http://circles.youth.gov.ae/img/play-btn.png" width="150" height="150">
+        <i class="fa fa-play-circle-o fa-5x" aria-hidden="true" style="color: white"></i>
     </div>
     <div class="viewer js-viewer" role="main">
-        <div class="viewer__loading-text">Loading data...</div>
+        <div class="viewer__loading-text">Loading video...</div>
         <div class="viewer__prompt">
             <img src="static/img/hand.png" alt="Drag to explore">
             <span class="drag-text">Drag to explore</span>
         </div>
-        <!--<div class="canvas-border"></div>-->
     </div>
 </div>
 <div class="modal artist-modal" data-modal="artist"></div>
@@ -99,15 +95,10 @@
 <script>
     vart.init('session', {
         sessionSlug: 'ab_genie_edit',
-        video: "RGBnDepth.mp4",
+        video: "RGBnDepth2.mp4",
         control: true
     });
 </script>
-
-<!--https://virtualartsessions.global.ssl.fastly.net/videos/ab_bull/edit_v1b/512_424/video.webm-->
-<!--rgb.webm-->
-<!--video.webm-->
-<!--video2.webm-->
 
 </body>
 </html>
