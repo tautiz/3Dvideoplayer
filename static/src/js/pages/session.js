@@ -120,9 +120,9 @@ function checkAutoplay_(sketch) {
  * before removing animation, or when the user clicks on the viewer.
  */
 function initPrompt_() {
-    if (localStorage.getItem('interacted') === 'true') {
-        return;
-    }
+    //if (localStorage.getItem('interacted') === 'true') {
+    //    return;
+    //}
 
     $('.viewer__prompt').addClass('is-visible');
     $('.viewer').on('mousedown touchstart', handleViewerClick_);
