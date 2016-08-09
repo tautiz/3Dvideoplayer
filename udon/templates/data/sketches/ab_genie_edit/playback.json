@@ -4,25 +4,47 @@
       "fovx": 365.913,
       "fovy": 365.913,
 
-      "ppx": 256.0,
-      "ppy": 210.0,
+      "ppx": 256.017,
+      "ppy": 210.095,
 
       "width": 512.0,
-      "height": 395.0,
+      "height": 424.0,
       "minDepth": 600.0,
-      "maxDepth": 4500.0
+      "maxDepth": 4500.0,
+      "side":"A",
+      "cube" : {
+        "x":0,
+        "y":-100,
+        "z":-500,
+        "rotation": {
+          "x":-1,
+          "y":0,
+          "z":0
+        }
+      }
     },
     {
       "fovx": 366.627,
       "fovy": 366.627,
 
       "ppx": 261.995,
-      "ppy": 211,
+      "ppy": 211.285,
 
       "width": 512.0,
-      "height": 395.0,
+      "height": 424.0,
       "minDepth": 860.0,
-      "maxDepth": 4450.0
+      "maxDepth": 4450.0,
+      "side":"B",
+      "cube" :{
+        "x":0,
+        "y":-100,
+        "z":-500,
+        "rotation": {
+          "x":-1,
+          "y":0,
+          "z":0
+        }
+      }
     }
   ]
 }
