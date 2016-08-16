@@ -139,7 +139,7 @@ export function create(settings, frameLoop) {
         .appendTo($(document.body))
     .hide();
 
-    const $video = $('<video id="rawvideo" loop autoplay type="video/ogg; codecs="theora, vorbis">')
+    const $video = $('<video id="rawvideo">')
         .css({
             width: '100%'
         })
@@ -147,19 +147,19 @@ export function create(settings, frameLoop) {
         .before($('<p>RAW VIDEO</p>'));
 
     const videoElement = $video[0];
-    //videoElement.crossOrigin = 'use-credentials';
-    videoElement.crossOrigin = '';
+    videoElement.crossOrigin = 'use-credentials';
+    //videoElement.crossOrigin = '';
 
-    //const videoCanvas = createVideoCanvas();
-    //videoCanvas.$element
-    //    .appendTo($controllerGroup)
-    //    .before($('<p>CANVAS</p>'));
+    const videoCanvas = createVideoCanvas();
+    videoCanvas.$element
+        .appendTo($controllerGroup)
+        .before($('<p>CANVAS</p>'));
 
     videoElement.addEventListener('loadedmetadata', function () {
-        //videoCanvas.setSize(videoElement.videoWidth, videoElement.videoHeight);
+        videoCanvas.setSize(videoElement.videoWidth, videoElement.videoHeight);
         videoElement.crossOrigin = '';
     });
-
+    //debugVideo();
     let canvasPlayback;
 
     function load(filePath) {
@@ -234,8 +234,8 @@ export function create(settings, frameLoop) {
     }
 
     function unload() {
-        // videoElement.parentNode.removeElement( videoElement );
-        // videoCanvas.canvas.parentNode.removeElement( videoCanvas.canvas );
+         videoElement.parentNode.removeElement( videoElement );
+         videoCanvas.canvas.parentNode.removeElement( videoCanvas.canvas );
         $controllerGroup.remove();
         videoState.playing = false;
     }
@@ -246,6 +246,10 @@ export function create(settings, frameLoop) {
     }
 
     function seek(pos) {
+
+        if(pos == Infinity) { return false; }
+
+console.debug('Iraso pozicija', pos);
 
         // some browsers (safari, iOS) seem to do weird things if you seek to a position that's too long a floating point number
         // http://blog.millermedeiros.com/html5-video-issues-on-the-ipad-and-how-to-solve-them/
@@ -279,7 +283,13 @@ export function create(settings, frameLoop) {
     }
 
     function getDuration() {
-        return videoElement.duration;
+        var duration = 0;
+
+        if (videoElement.readyState > 0) {
+            duration = Math.round(videoElement.duration);
+        }
+
+        return duration;
     }
 
     function getPercentage() {

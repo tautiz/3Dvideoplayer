@@ -37,12 +37,7 @@ module.exports = function() {
         .src(vendorScripts)
         .pipe(gulp.dest(path.join(PATHS.DIST.JS, 'third_party')));
 
-      // Google Analytics CSP compliant script
-      ga = gulp
-        .src(path.join(PATHS.SRC.JS, 'gaw.js'))
-        .pipe(gulp.dest(PATHS.DIST.JS));
-
-      return merge(thirdParty, ga);
+      return merge(thirdParty);
     },
     fonts: function() {
       return gulp.src(path.join(PATHS.SRC.FONTS, '**', '*'))

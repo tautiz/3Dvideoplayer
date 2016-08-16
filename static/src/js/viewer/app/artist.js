@@ -71,9 +71,90 @@ export function create({ video, artistSettings, cameraData, sourceCorners } = {}
         mesh = new THREE.LineSegments(geometry, material);
     }
 
+    //var cubegeometry = new THREE.BoxGeometry( sourceWidth, sourceHeight, 450 );
+    //cubegeometry.translate( 0, 0, 200);
+    //
+    //var spalva = '#00ff00';
+    //
+    //if (cameraData.side == 'B') {
+    //    var spalva = '#ff0000';
+    //}
+    //var cubematerial = new THREE.MeshBasicMaterial( {color: spalva, wireframe:true} );
+    //var cube = new THREE.Mesh( cubegeometry, cubematerial );
+    //
+    //cube.rotation.x = cameraData.cube.rotation.x;
+    //cube.rotation.y = cameraData.cube.rotation.y;
+    //cube.rotation.z = cameraData.cube.rotation.z;
+    //
+    //cube.position.x = cameraData.cube.x;
+    //cube.position.y = cameraData.cube.y;
+    //cube.position.z = cameraData.cube.z;
+    //
+    //var cubegeometryGui = new dat.GUI();
+    //var cubeguiposition = cubegeometryGui.addFolder('position');
+    //var cubeguirotation = cubegeometryGui.addFolder('rotation');
+    //
+    //cubeguiposition.add(cube.position, 'x', -1000, 0).step(0.001);
+    //cubeguiposition.add(cube.position, 'y', -1000, 0).step(0.001);
+    //cubeguiposition.add(cube.position, 'z', -1000, 0).step(0.001);
+    //
+    //cubeguirotation.add(cube.rotation, 'x').min(-1000).max(100).step(0.001);
+    //cubeguirotation.add(cube.rotation, 'y').min(-1000).max(100).step(0.001);
+    //cubeguirotation.add(cube.rotation, 'z').min(-1000).max(100).step(0.001);
+
+mesh.castShadow = true;
 
     mesh.frustumCulled = false;
+
+    //var bbox = new THREE.BoundingBoxHelper( mesh, 0xff0000 );
+    //bbox.update();
+    //view.add( bbox );
+
+    var light = new THREE.SpotLight( 0xFFAA55 );
+    light.castShadow = true;
+    light.position.set( 0, 0, 0 );
+    light.target.position.set(-100,-100,0);
+
+    light.shadowCameraNear = 0.1;
+
+    view.add(light.target);
+
+    //var lightGui = new dat.GUI();
+
+    //lightGui.add(light, 'shadowCameraNear', -10000, 10000).step(0.001);
+    //lightGui.add(light.shadow.camera, 'near', -10000, 10000).step(0.001);
+    //lightGui.add(light.shadow.camera, 'far', -10000, 10000).step(0.001);
+    //lightGui.add(light.shadow.camera, 'fov', -10000, 10000).step(0.001);
+    //lightGui.add(light.position, 'x', -10000, 10000).step(0.001);
+    //lightGui.add(light.position, 'y', -10000, 10000).step(0.001);
+    //lightGui.add(light.position, 'z', -10000, 10000).step(0.001);
+    //
+    //lightGui.add(light.target.position, 'x').min(100).max(100.000000001).step(0.000001);
+    //lightGui.add(light.target.position, 'y').min(100).max(100.000000001).step(0.000001);
+    //lightGui.add(light.target.position, 'z').min(100).max(100.000000001).step(0.000001);
+
+    //light.target.updateMatrixWorld();
+    //lightGui.add(light.shadow.mapSize, 'height', -10000, 10000).step(0.001);
+    //lightGui.add(light.shadow.height, 'height', -10000, 10000).step(0.001);
+
+    //light.shadow.camera.lookAt( new THREE.Vector3(200,300,400));
+
+    light.shadow.camera.near = 47;
+    light.shadow.camera.far = 4500;
+    light.shadow.camera.fov = 20;
+
+    view.add( light );
+
+    //var helperis = new THREE.SpotLightHelper( light );
+    //scene.add( helperis );
+
+    // SHADOW CAMERA HELPER
+    var helperis = new THREE.CameraHelper( light.shadow.camera );
+    //view.add( helperis );
+
+
     view.add(mesh);
+    //view.add(cube);
 
     view.update = function () {
         video.crossOrigin = '*';
@@ -221,42 +302,42 @@ function buildMaterial({
         //shading: THREE.FlatShading,
         //wireframe:false
     });
-/*
-    var artistViewGui = new dat.GUI();
-    var cam_fovx = artistViewGui.addFolder('cam_fovx');
-    cam_fovx.add(material.uniforms.cam_fovx, 'value', -500, 500);
-    var cam_fovy = artistViewGui.addFolder('cam_fovy');
-    cam_fovy.add(material.uniforms.cam_fovy, 'value', -500, 500);
 
-    var cam_ppx = artistViewGui.addFolder('cam_ppx');
-    cam_ppx.add(material.uniforms.cam_ppx, 'value', -500, 500);
-    var cam_ppy = artistViewGui.addFolder('cam_ppy');
-    cam_ppy.add(material.uniforms.cam_ppy, 'value', -500, 500);
+    //var artistViewGui = new dat.GUI();
+    //var cam_fovx = artistViewGui.addFolder('cam_fovx');
+    //cam_fovx.add(material.uniforms.cam_fovx, 'value', -500, 500);
+    //var cam_fovy = artistViewGui.addFolder('cam_fovy');
+    //cam_fovy.add(material.uniforms.cam_fovy, 'value', -500, 500);
+    //
+    //var cam_ppx = artistViewGui.addFolder('cam_ppx');
+    //cam_ppx.add(material.uniforms.cam_ppx, 'value', -500, 500);
+    //var cam_ppy = artistViewGui.addFolder('cam_ppy');
+    //cam_ppy.add(material.uniforms.cam_ppy, 'value', -500, 500);
+    //
+    //var cam_minDepth = artistViewGui.addFolder('cam_minDepth');
+    //cam_minDepth.add(material.uniforms.cam_minDepth, 'value', -0, 5000);
+    //var cam_maxDepth = artistViewGui.addFolder('cam_maxDepth');
+    //cam_maxDepth.add(material.uniforms.cam_maxDepth, 'value', -0, 5000);
+    //
+    //var avg_width = artistViewGui.addFolder('width');
+    //avg_width.add(material.uniforms.width, 'value', 0, 1000);
+    //var avg_height = artistViewGui.addFolder('height');
+    //avg_height.add(material.uniforms.height, 'value', 0, 1000);
+    //
+    //var avg_zOffset = artistViewGui.addFolder('zOffset');
+    //avg_zOffset.add(material.uniforms.zOffset, 'value', -100, 200);
+    //var colorMode = artistViewGui.addFolder('colorMode');
+    //colorMode.add(material.uniforms.colorMode, 'value', 0, 4);
+    //var pointSize = artistViewGui.addFolder('pointSize');
+    //pointSize.add(material.uniforms.pointSize, 'value', -0, 50);
+    //
+    //var avg_other = artistViewGui.addFolder('Other');
+    //avg_other.add(material, 'depthTest');
+    //avg_other.add(material, 'depthWrite');
+    //avg_other.add(material, 'transparent');
+    //avg_other.add(material, 'wireframe');
+    //avg_other.add(material, 'shading', [THREE.SmoothShading, THREE.FlatShading]);
 
-    var cam_minDepth = artistViewGui.addFolder('cam_minDepth');
-    cam_minDepth.add(material.uniforms.cam_minDepth, 'value', -0, 5000);
-    var cam_maxDepth = artistViewGui.addFolder('cam_maxDepth');
-    cam_maxDepth.add(material.uniforms.cam_maxDepth, 'value', -0, 5000);
-
-    var avg_width = artistViewGui.addFolder('width');
-    avg_width.add(material.uniforms.width, 'value', 0, 1000);
-    var avg_height = artistViewGui.addFolder('height');
-    avg_height.add(material.uniforms.height, 'value', 0, 1000);
-
-    var avg_zOffset = artistViewGui.addFolder('zOffset');
-    avg_zOffset.add(material.uniforms.zOffset, 'value', -100, 200);
-    var colorMode = artistViewGui.addFolder('colorMode');
-    colorMode.add(material.uniforms.colorMode, 'value', 0, 4);
-    var pointSize = artistViewGui.addFolder('pointSize');
-    pointSize.add(material.uniforms.pointSize, 'value', -0, 50);
-
-    var avg_other = artistViewGui.addFolder('Other');
-    avg_other.add(material, 'depthTest');
-    avg_other.add(material, 'depthWrite');
-    avg_other.add(material, 'transparent');
-    avg_other.add(material, 'wireframe');
-    avg_other.add(material, 'shading', [THREE.SmoothShading, THREE.FlatShading]);
-*/
     if (artistSettings.renderStyle == "points") {
 
     } else if (artistSettings.renderStyle == "mesh") {

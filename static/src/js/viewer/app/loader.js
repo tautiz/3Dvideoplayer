@@ -20,21 +20,21 @@ import THREE from 'three';
 import * as Artist from './artist';
 //import * as Sketch from './sketch';
 import * as VideoController from './videocontroller';
-import * as StraightEdgeTool from './straightedgetool';
+//import * as StraightEdgeTool from './straightedgetool';
 import * as DataPlayer from './dataplayer';
-import * as InputView from './inputview';
-import * as VRMesh from './vrmesh';
+//import * as InputView from './inputview';
+//import * as VRMesh from './vrmesh';
 
 export var sketchLoader = R.curry(function ({ renderer, povCamera, frameLoop, control }, events, options, resolve, reject) {
 
     const path = getAbsolutePath() + '/data/sketches/' + options.sessionSlug + '/';
 
-    const videoSource = 'https://storage.googleapis.com/udon-media-usa/test_videos';
+    //const videoSource = 'https://storage.googleapis.com/udon-media-usa/test_videos';
 
     const mainGroup = new THREE.Group();
 
     const zUp = createZUp();
-    mainGroup.add(zUp);
+    //mainGroup.add(zUp);
 
     let player;
 
@@ -145,40 +145,47 @@ function createPlayer({
     Promise.all(loadList)
         .then(function ([ sketchData, inputState, playbackMeta, offsets, editing, videoController ] = []) {
             console.timeEnd('load json');
-/*
-            var artistViewGui = new dat.GUI();
-            artistViewGui.remember(offsets.positionA);
 
-            var afvg = artistViewGui.addFolder('Position A');
-            afvg.add(offsets.positionA, 'x', -500, 500);
-            afvg.add(offsets.positionA, 'y', -500, 500);
-            afvg.add(offsets.positionA, 'z', -500, 500);
-
-            afvg.add(offsets.positionA, 'pitch', -0, 360).step(0.1);
-            afvg.add(offsets.positionA, 'yaw', -0, 360).step(0.1);
-            afvg.add(offsets.positionA, 'roll', -0, 360).step(0.1);
-
-            var abvg = artistViewGui.addFolder('Position B');
-            abvg.add(offsets.positionB, 'x', -500, 500);
-            abvg.add(offsets.positionB, 'y', -500, 500);
-            abvg.add(offsets.positionB, 'z', -500, 500);
-
-            abvg.add(offsets.positionB, 'pitch', -0, 360).step(0.1);
-            abvg.add(offsets.positionB, 'yaw', -0, 360).step(0.1);
-            abvg.add(offsets.positionB, 'roll', -0, 360).step(0.1);
-
-            var abtvg = artistViewGui.addFolder('Position both');
-            abtvg.add(offsets.positionBoth, 'x', -300, 300);
-            abtvg.add(offsets.positionBoth, 'y', -300, 300);
-            abtvg.add(offsets.positionBoth, 'z', -300, 300);
-
-            abtvg.add(offsets.positionBoth, 'pitch', -0, 360);
-            abtvg.add(offsets.positionBoth, 'yaw', -0, 360);
-            abtvg.add(offsets.positionBoth, 'roll', -0, 360);
-*/
+            //
+            //var artistViewGui = new dat.GUI();
+            //artistViewGui.remember(offsets.positionA);
+            //
+            //var afvg = artistViewGui.addFolder('Position A');
+            //afvg.add(offsets.positionA, 'x', -500.001, 500.001).step(0.001);
+            //afvg.add(offsets.positionA, 'y', -500.001, 500.001).step(0.001);
+            //afvg.add(offsets.positionA, 'z', -500.001, 500.001).step(0.001);
+            //
+            //afvg.add(offsets.positionA, 'pitch', -180.001, 180.001).step(0.001);
+            //afvg.add(offsets.positionA, 'yaw', -180.001, 180.001).step(0.001);
+            //afvg.add(offsets.positionA, 'roll', -180.001, 180.001).step(0.001);
+            //
+            //var abvg = artistViewGui.addFolder('Position B');
+            //abvg.add(offsets.positionB, 'x', -500.001, 500.001).step(0.001);
+            //abvg.add(offsets.positionB, 'y', -500.001, 500.001).step(0.001);
+            //abvg.add(offsets.positionB, 'z', -500.001, 500.001).step(0.001);
+            //
+            //abvg.add(offsets.positionB, 'pitch', -180.001, 180.001).step(0.001);
+            //abvg.add(offsets.positionB, 'yaw', -180.001, 180.001).step(0.001);
+            //abvg.add(offsets.positionB, 'roll', -180.001, 180.001).step(0.001);
+            //
+            //var abtvg = artistViewGui.addFolder('Position both');
+            //abtvg.add(offsets.positionBoth, 'x', -300.001, 3000.001).step(0.001);
+            //abtvg.add(offsets.positionBoth, 'y', -300.001, 3000.001).step(0.001);
+            //abtvg.add(offsets.positionBoth, 'z', -300.001, 3000.001).step(0.001);
+            //
+            //abtvg.add(offsets.positionBoth, 'pitch', -180.001, 180.001).step(0.001);
+            //abtvg.add(offsets.positionBoth, 'yaw', -180.001, 180.001).step(0.001);
+            //abtvg.add(offsets.positionBoth, 'roll', -180.001, 180.001).step(0.001);
 
             //const ground = createGround();
+
+            const axes = new THREE.AxisHelper( 100 );
+
+            //mainGroup.add(axes);
             //mainGroup.add(ground);
+
+            var gridHelper = new THREE.GridHelper( 500, 40, 0x0000ff, 0x808080 );
+            //mainGroup.add( gridHelper );
 
             frameLoop.add(function () {
                 if (offsets.cameraTargetHeight !== undefined) {
@@ -286,7 +293,7 @@ function createPlayer({
 //    dataPlayer.bindEvents( sketchBindings );
 //            console.log(1000, offsets);
 
-            const { bindings : inputBindings, view: inputView, hmd, rhand, lhand, mirror } = InputView.create(inputState);
+//    const { bindings : inputBindings, view: inputView, hmd, rhand, lhand, mirror } = InputView.create(inputState);
 //    dataPlayer.bindEvents( inputBindings );
 //    zUp.add( inputView );
 
@@ -297,7 +304,7 @@ function createPlayer({
 //    dataPlayer.bindEvents( straightEdgePlayer.bindings );
 //    zUp.add( straightEdgePlayer.view );
 
-            hmd.add(povCamera);
+            //hmd.add(povCamera);
 
             const appState = {
                 pov: false,
@@ -445,7 +452,7 @@ function createPlayer({
             }
 
             function rewind() {
-                seek(0);
+                seek(0.1);
             }
 
             function progress() {
@@ -561,7 +568,7 @@ function createPlayer({
 
             // console.log('END OF LOADER');
 
-            seek(0);
+            seek(0.1);
 
             pause();
 
@@ -599,22 +606,49 @@ function createPlayer({
 }
 
 function createGround() {
-    const ground = new THREE.Mesh(new THREE.CylinderGeometry(200, 200, 20, 80),
-        new THREE.MeshPhongMaterial({
-            color: "#000000"
-            , specular: "#ffffff"
-            , shininess: 1
-        })
+
+
+    // each square
+    var planeW = 50; // pixels
+    var planeH = 50; // pixels
+    var numW = 50; // how many wide (50*50 = 2500 pixels wide)
+    var numH = 50; // how many tall (50*50 = 2500 pixels tall)
+    var plane = new THREE.Mesh(
+        new THREE.PlaneGeometry( planeW*numW, planeH*numH, planeW, planeH ),
+        new THREE.MeshBasicMaterial( {
+            color: 0x505050,
+            wireframe: false,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.5
+        } )
     );
 
-    //
+    plane.rotation.x = Math.PI / 2;
+    plane.position.y = 0;
+
     //var guiGround = new dat.GUI();
     //var ggp = guiGround.addFolder('Ground Position');
-    //ggp.add(ground.position, 'x', -500, 500);
-    //ggp.add(ground.position, 'y', -500, 500);
-    //ggp.add(ground.position, 'z', -500, 500);
+    //ggp.add(plane.position, 'y').min(-100).max(100).step(0.000001).name('Y coordinate');
 
     //ground.position.y = 0;
-    ground.receiveShadow = false;
-    return ground;
+
+    plane.receiveShadow = true;
+
+    return plane;
+
+
+
+
+    //const ground = new THREE.Mesh(new THREE.CylinderGeometry(200, 200, 20, 80),
+    //    new THREE.MeshPhongMaterial({
+    //        color: "#000000"
+    //        , specular: "#ffffff"
+    //        , shininess: 1
+    //    })
+    //);
+    //
+    //
+    //ground.receiveShadow = false;
+    //return ground;
 }

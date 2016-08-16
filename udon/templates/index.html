@@ -17,12 +17,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link href="static/img/favicon.ico" rel="shortcut icon">
     <script src="static/js/third_party/modernizr-custom.js"></script>
-    <!--<script src="http://threejs.org/examples/js/libs/stats.min.js"></script>-->
-    <script src="http://threejs.org/examples/js/libs/dat.gui.min.js"></script>
+    <script src="dat.gui.min.js"></script>
 
 </head>
 <body>
-<div class="session">
+<div class="session" id="session">
     <div class="session__navigation">
 
         <div class="session__meta" style="display: none">
@@ -59,10 +58,10 @@
 
             <div class="session__buttons-right">
                 <button class="icon-button session__fullscreen">
-                    <i class="fa fa-arrows-alt fa-2x" aria-hidden="true"style="color:white"></i>
+                    <i class="fa fa-arrows-alt fa-2x" aria-hidden="true" style="color:white"></i>
                 </button>
                 <button class="icon-button session__fullscreen-exit">
-                    <i class="fa fa-compress fa-2x" aria-hidden="true"style="color:white"></i>
+                    <i class="fa fa-compress fa-2x" aria-hidden="true" style="color:white"></i>
                 </button>
             </div>
 
@@ -73,7 +72,7 @@
         <i class="fa fa-play-circle-o fa-5x" aria-hidden="true" style="color: white"></i>
     </div>
     <div class="viewer js-viewer" role="main">
-        <div class="viewer__loading-text">Loading video...</div>
+        <div class="viewer__loading-text"><img src="static/img/loading.gif"></div>
         <div class="viewer__prompt">
             <img src="static/img/hand.png" alt="Drag to explore">
             <span class="drag-text">Drag to explore</span>
@@ -93,9 +92,77 @@
 
 <script id="main-script" src="static/js/vart.js"></script>
 <script>
+
+/* --- Test with browser and video files formats --- */
+    var OSName = "Unknown OS";
+    if (navigator.appVersion.indexOf("Win") != -1) OSName = "Windows";
+    if (navigator.appVersion.indexOf("Mac") != -1) OSName = "MacOS";
+    if (navigator.appVersion.indexOf("X11") != -1) OSName = "UNIX";
+    if (navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
+
+    var nAgt = navigator.userAgent;
+    var browserName = navigator.appName;
+
+    // In Opera, the true version is after "Opera" or after "Version"
+    if ((verOffset = nAgt.indexOf("Opera")) != -1) {
+        browserName = "Opera";
+    }
+// In MSIE, the true version is after "MSIE" in userAgent
+    else if ((verOffset = nAgt.indexOf("MSIE")) != -1) {
+        browserName = "Microsoft Internet Explorer";
+    }
+// In Chrome, the true version is after "Chrome"
+    else if ((verOffset = nAgt.indexOf("Chrome")) != -1) {
+        browserName = "Chrome";
+    }
+// In Safari, the true version is after "Safari" or after "Version"
+    else if ((verOffset = nAgt.indexOf("Safari")) != -1) {
+        browserName = "Safari";
+    }
+// In Firefox, the true version is after "Firefox"
+    else if ((verOffset = nAgt.indexOf("Firefox")) != -1) {
+        browserName = "Firefox";
+    }
+
+    if (OSName == 'MacOS') {
+        file_ext = "webm";
+
+        if (browserName == "Chrome") {
+            file_ext = "ogv";
+
+        } else if (browserName == "Safari") {
+            file_ext = "ogv";
+
+        } else if (browserName == "Firefox") {
+            file_ext = "mp4";
+        }
+
+
+    } else if (OSName == 'Linux' || OSName == 'UNIX') {
+        file_ext = "mp4";
+
+        if (browserName == "Chrome") {
+            // MP4 rodo Duration'a iskart, bet MP4 pragroja tik viena karta ir toliau uzlusta.
+            // OGV pradzioje nerodo duration, bet loopas veikia puikiai.
+            file_ext = "ogv";
+
+        } else if (browserName == "Firefox") {
+                file_ext = "mp4";
+        }
+
+    } else {
+        file_ext = "mp4";
+    }
+
+/* --- END OF TEST --- */
+
+//    file_name = 'out';
+//    file_name = 'RGBnDepth20160809';
+    file_name = 'RGBnDepth';
+
     vart.init('session', {
         sessionSlug: 'ab_genie_edit',
-        video: "RGBnDepth.mp4",
+        video: file_name +'.'+ file_ext,
         control: true
     });
 </script>

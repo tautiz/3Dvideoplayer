@@ -16,24 +16,18 @@
 import 'babel-polyfill';
 const bowser = require('bowser');
 
-import autotrack from './components/autotrack';
-import focusmanager from './components/focusmanager';
+//import focusmanager from './components/focusmanager';
 
 import * as logger from './utils/logger';
 import * as session from './pages/session';
-import * as test from './pages/test';
-
-const components = {
-  autotrack
-};
+//import * as test from './pages/test';
 
 const pages = {
   session
 };
 
 /**
- * Initialise page-specific modules. Also initialise components with each of
- * their init functions.
+ * Initialise page-specific modules.
  * @param {string} name The page's name.
  * @param {Object} options Options to pass to page's module.
  */
@@ -46,10 +40,6 @@ function init(name, options) {
 
   if (bowser.msie) {
     docEl.className = docEl.className.concat(' msie');
-  }
-
-  for (let component in components) {
-    components[component].init();
   }
 
   if (name && pages[name] && pages[name].init) {

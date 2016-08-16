@@ -15,7 +15,6 @@
  */
 import * as Signal from '../viewer/app/signal';
 import $ from 'jquery';
-import analytics from '../components/analytics';
 import 'jquery-ui/slider';
 import '../third_party/jquery.ui.touch-punch';
 
@@ -61,11 +60,7 @@ class SketchProgressBar {
       this.sketchPlayer.pause();
 
       this.dragging = true;
-      this.sketchPlayer.analytics.pause();
       this.events.onSeekStart.emit();
-
-      analytics('send', 'event', 'viewer', `seek-start:${time}`,
-          window.location.pathname);
     }
   }
 
@@ -79,16 +74,11 @@ class SketchProgressBar {
     const time = this.getTimeFromSliderPosition(ui.value, sketchDuration);
     this.dragging = false;
     this.sketchPlayer.seek(ui.value);
-    this.sketchPlayer.analytics.resume();
-    this.sketchPlayer.seek(ui.value);
     this.events.onSeekEnd.emit();
 
     if (this.wasPlaying_ && !this.sketchPlayer.sketch.isFinished()) {
       this.sketchPlayer.play();
     }
-
-    analytics('send', 'event', 'viewer', `seek-end:${time}`,
-        window.location.pathname);
   }
 
   getTimeFromSliderPosition(sliderValue, sketchDuration) {

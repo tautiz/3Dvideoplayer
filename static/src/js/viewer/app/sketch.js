@@ -186,7 +186,7 @@ function generateBrushPlayback( actionsRaw, brush ){
     depthTest: true,
     depthWrite: true,
     // side: THREE.BackSide,
-    // side: THREE.DoubleSide,
+     side: THREE.DoubleSide,
     wireframe: false,
     vertexColors: THREE.FaceColors
   };
