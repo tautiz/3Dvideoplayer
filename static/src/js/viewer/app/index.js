@@ -59,7 +59,7 @@ export function create({
 
             view.add(sketch.view);
             //view.add(createLights());
-            view.add(...createLights());
+            //view.add(...createLights());
 
         });
     }

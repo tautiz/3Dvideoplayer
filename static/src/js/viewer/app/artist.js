@@ -17,7 +17,7 @@ import THREE from 'three';
 import * as ArtistShader from './artistshader';
 import * as DeviceCheck from './devicecheck';
 
-export function create({ video, artistSettings, cameraData, sourceCorners } = {}) {
+export function create({ video, artistSettings, cameraData, sourceCorners, options } = {}) {
 
     const { minDepth: nearClip, maxDepth: farClip } = cameraData;
 
@@ -102,56 +102,56 @@ export function create({ video, artistSettings, cameraData, sourceCorners } = {}
     //cubeguirotation.add(cube.rotation, 'y').min(-1000).max(100).step(0.001);
     //cubeguirotation.add(cube.rotation, 'z').min(-1000).max(100).step(0.001);
 
-mesh.castShadow = true;
+    mesh.castShadow = true;
 
     mesh.frustumCulled = false;
 
-    //var bbox = new THREE.BoundingBoxHelper( mesh, 0xff0000 );
-    //bbox.update();
-    //view.add( bbox );
-
-    var light = new THREE.SpotLight( 0xFFAA55 );
-    light.castShadow = true;
-    light.position.set( 0, 0, 0 );
-    light.target.position.set(-100,-100,0);
-
-    light.shadowCameraNear = 0.1;
-
-    view.add(light.target);
-
-    //var lightGui = new dat.GUI();
-
-    //lightGui.add(light, 'shadowCameraNear', -10000, 10000).step(0.001);
-    //lightGui.add(light.shadow.camera, 'near', -10000, 10000).step(0.001);
-    //lightGui.add(light.shadow.camera, 'far', -10000, 10000).step(0.001);
-    //lightGui.add(light.shadow.camera, 'fov', -10000, 10000).step(0.001);
-    //lightGui.add(light.position, 'x', -10000, 10000).step(0.001);
-    //lightGui.add(light.position, 'y', -10000, 10000).step(0.001);
-    //lightGui.add(light.position, 'z', -10000, 10000).step(0.001);
-    //
-    //lightGui.add(light.target.position, 'x').min(100).max(100.000000001).step(0.000001);
-    //lightGui.add(light.target.position, 'y').min(100).max(100.000000001).step(0.000001);
-    //lightGui.add(light.target.position, 'z').min(100).max(100.000000001).step(0.000001);
-
-    //light.target.updateMatrixWorld();
-    //lightGui.add(light.shadow.mapSize, 'height', -10000, 10000).step(0.001);
-    //lightGui.add(light.shadow.height, 'height', -10000, 10000).step(0.001);
-
-    //light.shadow.camera.lookAt( new THREE.Vector3(200,300,400));
-
-    light.shadow.camera.near = 47;
-    light.shadow.camera.far = 4500;
-    light.shadow.camera.fov = 20;
-
-    view.add( light );
-
-    //var helperis = new THREE.SpotLightHelper( light );
-    //scene.add( helperis );
+    if (options.debug.helpers.boundingbox) {
+        var bbox = new THREE.BoundingBoxHelper( mesh, 0xff0000 );
+        bbox.update();
+        view.add( bbox );
+    }
 
     // SHADOW CAMERA HELPER
-    var helperis = new THREE.CameraHelper( light.shadow.camera );
-    //view.add( helperis );
+    if (options.debug.helpers.camera) {
 
+        var light = new THREE.SpotLight( 0x0000FF );
+        light.castShadow = true;
+        light.position.set( 50, 50, 50 );
+
+        light.angle = 0.4;
+        light.penumbra = 0;
+        light.decay = 20;
+        light.distance = 1200;
+
+        //light.shadow.mapSize.width = 2048;
+        //light.shadow.mapSize.height = 2048;
+
+        light.target.position.set(1,0,0);
+
+        light.shadowCameraNear = 0.1;
+
+        light.shadow.camera.near = 47;
+        light.shadow.camera.far = 1200;
+        light.shadow.camera.fov = 40;
+
+        view.add(light.target);
+
+        var lightGui = new dat.GUI();
+
+        lightGui.add(light.position, 'x', -10000, 10000).step(0.001);
+        lightGui.add(light.position, 'y', -10000, 10000).step(0.001);
+        lightGui.add(light.position, 'z', -10000, 10000).step(0.001);
+
+        var helperis = new THREE.SpotLightHelper( light );
+        view.add( helperis );
+
+        var helperis = new THREE.CameraHelper(light.shadow.camera);
+        view.add( helperis );
+
+        view.add( light );
+
+    }
 
     view.add(mesh);
     //view.add(cube);

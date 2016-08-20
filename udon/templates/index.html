@@ -35,7 +35,7 @@
                 <button class="speed__8x" data-speed="8.0">8x</button>
             </div>
         </div>
-
+<!--
         <div class="session__controls">
             <div class="icon-button session__buttons">
                 <button class="session__play">
@@ -66,7 +66,7 @@
             </div>
 
         </div>
-
+-->
     </div>
     <div class="viewer__play">
         <i class="fa fa-play-circle-o fa-5x" aria-hidden="true" style="color: white"></i>
@@ -163,7 +163,22 @@
     vart.init('session', {
         sessionSlug: 'ab_genie_edit',
         video: file_name +'.'+ file_ext,
-        control: true
+        playbar: false,
+        zoom: false,
+        pan: false,
+        debug: {
+            controlls: {
+                possitions: false,
+                cam_pos: false
+            },
+            helpers: {
+                grid: false,
+                axes:false,
+                ground: false,
+                boundingbox: false,
+                camera: false
+            }
+        }
     });
 </script>
 
