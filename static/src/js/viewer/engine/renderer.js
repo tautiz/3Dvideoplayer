@@ -231,7 +231,7 @@ export default function ({ width, height, antialias } = {}) {
 
 
 export function createDefaultCamera() {
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1 + (window.devicePixelRatio - 1) * 30.0, 2000 - ( window.devicePixelRatio - 1 ) * 50);
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1 + (window.devicePixelRatio - 1) * 30.0, 20000 - ( window.devicePixelRatio - 1 ) * 50);
     camera.reset = ()=>setDefaultCameraPosition(camera);
     window.camera = camera;
     return camera;
