@@ -25,9 +25,9 @@ export default function createControl( camera, domElement ){
   orbitControls.userPanSpeed = 0.3;
   orbitControls.zoomSpeed = 3.0;
   orbitControls.keyPanSpeed = 30.0;
-  orbitControls.noZoom = false;
+  orbitControls.noZoom = true;
   orbitControls.noRotate = false;
-  orbitControls.noPan = false;
+  orbitControls.noPan = true;
   orbitControls.minDistance = 600;
   orbitControls.maxDistance = 3000;
   //orbitControls.minPolarAngle = Math.PI * 0.02;
